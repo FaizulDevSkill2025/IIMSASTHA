@@ -1,7 +1,11 @@
+using IIMSASTHA.StartupExtension;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDatabaseExtensionHelper(builder.Configuration); // Database Configuration
 
 var app = builder.Build();
 

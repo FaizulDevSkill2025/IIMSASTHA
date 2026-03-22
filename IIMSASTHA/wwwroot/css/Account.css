@@ -1,0 +1,13 @@
+﻿
+    ﻿.account-container {
+        background-image: url('../Images/Img-2.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: repeat-y;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        width: 100%;
+        padding: 2rem 0;
+    }

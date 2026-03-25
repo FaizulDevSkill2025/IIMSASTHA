@@ -1,6 +1,8 @@
-using IIMSASTHA.StartupExtension;
 using IIMSASTHA.Data;
+using IIMSASTHA.StartupExtension;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -20,6 +22,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDatabaseExtensionHelper(builder.Configuration); // Database Configuration
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,9 +35,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseRouting();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapStaticAssets();

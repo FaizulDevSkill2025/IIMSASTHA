@@ -1,10 +1,17 @@
-﻿using IIMSASTHA.Interfaces;
+﻿using IIMSASTHA.Data;
+using IIMSASTHA.Interfaces;
 using IIMSASTHA.Models;
 
 namespace IIMSASTHA.Repository
 {
     public class VCardRepository : Ivascard
     {
+        private readonly ApplicationDbContext _context;
+
+        public VCardRepository(ApplicationDbContext context)
+        {
+            this._context = context;
+        }
         public List<Vascard> GetAllVascard()
         {
             throw new NotImplementedException();
@@ -24,7 +31,6 @@ namespace IIMSASTHA.Repository
         {
             throw new NotImplementedException();
         }
-
 
         public Vascard UpdateVascard(Vascard uvcard)
         {

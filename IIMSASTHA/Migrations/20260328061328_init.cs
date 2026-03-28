@@ -51,6 +51,26 @@ namespace IIMSASTHA.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "vascards",
+                columns: table => new
+                {
+                    VascardId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    SigImageUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Designation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Blood = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    JoiningDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_vascards", x => x.VascardId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -213,6 +233,9 @@ namespace IIMSASTHA.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "vascards");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

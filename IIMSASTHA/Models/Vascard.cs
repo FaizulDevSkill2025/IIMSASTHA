@@ -4,6 +4,7 @@ namespace IIMSASTHA.Models
 {
     public class Vascard
     {
+        [Key]
         public int VascardId { get; set; }
 
         [Display(Name = "Code")]

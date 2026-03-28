@@ -14,17 +14,19 @@ namespace IIMSASTHA.Repository
         }
         public List<Vascard> GetAllVascard()
         {
-            throw new NotImplementedException();
+            return _context.vascards.ToList();
         }
 
-        public Vascard GetVascardById()
+        public Vascard GetVascardById(int id)
         {
-            throw new NotImplementedException();
+            Vascard vcard = _context.vascards.FirstOrDefault(v=>v.VascardId == id);
+            return vcard;
         }
 
         public Vascard Details(int id)
         {
-            throw new NotImplementedException();
+            Vascard vcard = _context.vascards.FirstOrDefault(v => v.VascardId == id);
+            return vcard;
         }
 
         public Vascard AddVascard(Vascard vcard)

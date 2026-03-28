@@ -6,7 +6,7 @@ namespace IIMSASTHA.Interfaces
     {
         List<Vascard> GetAllVascard();
 
-        Vascard GetVascardById();
+        Vascard GetVascardById(int id);
 
         Vascard AddVascard(Vascard vcard);
 

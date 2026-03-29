@@ -14,7 +14,8 @@ namespace IIMSASTHA.Repository
         }
         public List<Vascard> GetAllVascard()
         {
-            return _context.vascards.ToList();
+            List<Vascard> vscrd = _context.vascards.ToList();
+            return vscrd;
         }
 
         public Vascard GetVascardById(int id)
@@ -31,17 +32,36 @@ namespace IIMSASTHA.Repository
 
         public Vascard AddVascard(Vascard vcard)
         {
-            throw new NotImplementedException();
+            _context.vascards.Add(vcard);
+            _context.SaveChanges();
+            return vcard;
         }
 
         public Vascard UpdateVascard(Vascard uvcard)
         {
-            throw new NotImplementedException();
+            Vascard vscard = _context.vascards.FirstOrDefault(v=> v.VascardId == uvcard.VascardId);
+            vscard.VascardId = uvcard.VascardId;
+            vscard.Code = uvcard.Code;
+            vscard.ImageUrl = uvcard.ImageUrl;
+            vscard.SigImageUrl = uvcard.SigImageUrl;
+            vscard.Name = uvcard.Name;
+            vscard.Designation = uvcard.Designation;
+            vscard.Blood = uvcard.Blood;
+            vscard.JoiningDate = uvcard.JoiningDate;
+            vscard.Status = uvcard.Status;
+            _context.SaveChanges(true);
+            return uvcard;
         }
 
         public void DeleteVascard(int id)
         {
-            throw new NotImplementedException();
+            Vascard delvascard = _context.vascards.FirstOrDefault(v=> v.VascardId == id);
+            
+            if (delvascard !=null)
+            {
+                _context.vascards.Remove(delvascard);
+                _context.SaveChanges();
+            }
         }        
     }
 }

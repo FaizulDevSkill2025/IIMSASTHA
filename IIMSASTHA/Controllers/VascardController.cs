@@ -12,13 +12,13 @@ namespace IIMSASTHA.Controllers
 
         private readonly Ivascard _ivascard;
 
-        private readonly IWebHostEnvironment _env; 
+        private readonly IWebHostEnvironment _env;
 
         public VascardController(ApplicationDbContext ctx, Ivascard ivascard, IWebHostEnvironment env)
         {
-           _context = ctx;
-           _ivascard = ivascard;
-           _env = env;
+            _context = ctx;
+            _ivascard = ivascard;
+            _env = env;
         }
 
         public IActionResult Index()
@@ -35,25 +35,25 @@ namespace IIMSASTHA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult> Create(Vascard vcrd,IFormFile ImageFile,IFormFile SignatureFile)
+        public async Task<IActionResult> Create(Vascard vcrd, IFormFile ImageFile, IFormFile SignatureFile)
         {
             if (ImageFile != null)
             {
-                
+
                 string fileName = Path.GetFileName(ImageFile.FileName);
                 string filePath = Path.Combine("wwwroot/Vascard", fileName);
-                
+
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await ImageFile.CopyToAsync(stream);
                 }
 
-                vcrd.ImageUrl = "/Vascard/" + fileName;     
+                vcrd.ImageUrl = "/Vascard/" + fileName;
             }
             else
             {
-                vcrd.ImageUrl = "default.jpg"; 
+                vcrd.ImageUrl = "default.jpg";
             }
 
             if (SignatureFile != null)
@@ -67,11 +67,11 @@ namespace IIMSASTHA.Controllers
                     await SignatureFile.CopyToAsync(stream);
                 }
 
-                vcrd.SigImageUrl = "/Vascard/" + fileName;  
+                vcrd.SigImageUrl = "/Vascard/" + fileName;
             }
             else
             {
-                vcrd.SigImageUrl = "default.jpg"; 
+                vcrd.SigImageUrl = "default.jpg";
             }
             try
             {
@@ -83,7 +83,7 @@ namespace IIMSASTHA.Controllers
 
                 throw;
             }
-            return RedirectToAction(actionName:nameof(Index));
+            return RedirectToAction(actionName: nameof(Index));
         }
 
         [HttpGet]
@@ -95,7 +95,7 @@ namespace IIMSASTHA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult> Edit(Vascard vcrd,IFormFile ImageFile, IFormFile SignatureFile)
+        public async Task<IActionResult> Edit(Vascard vcrd, IFormFile ImageFile, IFormFile SignatureFile)
         {
 
             if (ImageFile != null)
@@ -146,7 +146,7 @@ namespace IIMSASTHA.Controllers
                 throw;
             }
 
-            
+
             return RedirectToAction(actionName: nameof(Index));
         }
 
@@ -171,20 +171,20 @@ namespace IIMSASTHA.Controllers
             return RedirectToAction(actionName: nameof(Index));
         }
 
-        private string UplodedFile(Vascard vcrd) 
+        private string UplodedFile(Vascard vcrd)
         {
             string uniqueFileName = null;
 
-            if (vcrd.ImageUrl !=null)
+            if (vcrd.ImageUrl != null)
             {
 
-                string uploadsFolder = Path.Combine(_env.WebRootPath,"images");
+                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + vcrd.ImageUrl;
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + vcrd.SigImageUrl;
                 string filepath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filepath, FileMode.Create)) 
+                using (var fileStream = new FileStream(filepath, FileMode.Create))
                 {
-                   
+
                 }
             }
             return uniqueFileName;

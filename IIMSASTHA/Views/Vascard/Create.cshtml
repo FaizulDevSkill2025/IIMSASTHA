@@ -8,11 +8,11 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/fontawesome.min.css" integrity="sha512-M5Kq4YVQrjg5c2wsZSn27Dkfm/2ALfxmun0vUE3mPiJyK53hQBHYCVAtvMYEC7ZXmYLg8DVG4tF8gD27WmDbsg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/fontawesome.min.css" integrity="sha512-M5Kq4YVQrjg5c2wsZSn27Dkfm/2ALfxmun0vUE3mPiJyK53hQBHYCVAtvMYEC7ZXmYLg8DVG4tF8gD27WmDbsg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <body2>
     <div class="container">
-        <header>Producer  Details</header>
+        <header>Producer Details</header>
         <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div class="form first">
                 <div class="row">
@@ -32,7 +32,7 @@
 
                         <div class="input-field">
                             <label asp-for="ImageUrl">Upload Image</label>
-                            <input asp-for="ImageUrl" type="file" accept="image/*" onchange="previewImage(event)" />
+                            <input type="file" name="ImageFile" accept="image/*" onchange="previewImage(event)" />
                         </div>
                         <span asp-validation-for="ImageUrl" class="text-danger"></span>
 
@@ -70,12 +70,11 @@
                             <img id="SignaturePreview" src="#" alt="Signature Preview"
                                  style="display:none; max-width:100px; border:1px solid #ddd; padding:5px;" />
                         </div>
-
                         <div class="input-field">
                             <label asp-for="SigImageUrl">Upload Signature</label>
-                            <input asp-for="SigImageUrl" type="file" accept="image/*" onchange="previewSignature(event)" />
+                            <input type="file" name="SignatureFile" accept="image/*" onchange="previewSignature(event)" />
                         </div>
-                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        <span asp-validation-for="SigImageUrl" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="button">
@@ -87,8 +86,6 @@
     </div>
 </body2>
 
-
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -97,7 +94,7 @@
     <script>
         $(document).ready(function () {
         $('#JoiningDate').datepicker({
-        format: 'yyyy-mm-dd', 
+        format: 'yyyy-mm-dd',
         });
         });
     </script>
@@ -105,31 +102,28 @@
     <script>
         function previewImage(event) {
         const input = event.target;
-        const preview = document.getElementById('imagePreview')
+        const preview = document.getElementById('imagePreview');
         if (input.files && input.files[0]) {
         const reader = new FileReader();
-
         reader.onload = function (e) {
         preview.src = e.target.result;
         preview.style.display = "block";
-        }
-
+        };
         reader.readAsDataURL(input.files[0]);
         }
         }
     </script>
+
     <script>
         function previewSignature(event) {
         const input = event.target;
-        const preview = document.getElementById('SignaturePreview')
+        const preview = document.getElementById('SignaturePreview');
         if (input.files && input.files[0]) {
         const reader = new FileReader();
-
         reader.onload = function (e) {
         preview.src = e.target.result;
         preview.style.display = "block";
-        }
-
+        };
         reader.readAsDataURL(input.files[0]);
         }
         }

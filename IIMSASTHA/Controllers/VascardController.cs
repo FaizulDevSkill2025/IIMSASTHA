@@ -2,7 +2,11 @@
 using IIMSASTHA.Interfaces;
 using IIMSASTHA.Models;
 using Microsoft.AspNetCore.Mvc;
-using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using System.Net.Http;
+using System.Drawing;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace IIMSASTHA.Controllers
 {
@@ -42,7 +46,6 @@ namespace IIMSASTHA.Controllers
 
                 string fileName = Path.GetFileName(ImageFile.FileName);
                 string filePath = Path.Combine("wwwroot/Vascard", fileName);
-
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
@@ -97,13 +100,14 @@ namespace IIMSASTHA.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Vascard vcrd, IFormFile ImageFile, IFormFile SignatureFile)
         {
+            var existingData = await _context.vascards.AsNoTracking().FirstOrDefaultAsync(x => x.VascardId == vcrd.VascardId);
 
             if (ImageFile != null)
             {
                 string fileName = Path.GetFileName(ImageFile.FileName);
                 string filePath = Path.Combine("wwwroot/Vascard", fileName);
 
-
+               
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await ImageFile.CopyToAsync(stream);
@@ -114,7 +118,8 @@ namespace IIMSASTHA.Controllers
             }
             else
             {
-                vcrd.ImageUrl = "default.jpg";
+                vcrd.ImageUrl = existingData.ImageUrl;
+                //vcrd.ImageUrl = "default.jpg";
             }
 
             if (SignatureFile != null)
@@ -132,7 +137,8 @@ namespace IIMSASTHA.Controllers
             }
             else
             {
-                vcrd.SigImageUrl = "default.jpg";
+                vcrd.SigImageUrl = existingData.SigImageUrl;
+                //vcrd.SigImageUrl = "default.jpg";
             }
 
             try
@@ -170,6 +176,8 @@ namespace IIMSASTHA.Controllers
             _context.SaveChanges(true);
             return RedirectToAction(actionName: nameof(Index));
         }
+
+       
 
         private string UplodedFile(Vascard vcrd)
         {

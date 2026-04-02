@@ -172,8 +172,10 @@ namespace IIMSASTHA.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult ConfirmDelete(int id)
         {
+
             _ivascard.DeleteVascard(id);
             _context.SaveChanges(true);
+            TempData["Success"] = "Data Deleted Successfully!";
             return RedirectToAction(actionName: nameof(Index));
         }
 

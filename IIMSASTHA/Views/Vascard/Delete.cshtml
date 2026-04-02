@@ -1,0 +1,82 @@
+﻿@model IIMSASTHA.Models.Vascard
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div>
+    <h4>Vascard</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VascardId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VascardId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/Vascard/Official Size 84kb.jpg" : Model.ImageUrl)" width="120" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SigImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@(string.IsNullOrEmpty(Model.SigImageUrl) ? "/Vascard/Signature.jpg" : Model.SigImageUrl)" width="120" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Designation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Designation)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Blood)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Blood)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JoiningDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JoiningDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    <form asp-action="Delete" method="post" onsubmit="return confirm('Are You Sure You Want to Delete this Record?');">
+        <input type="hidden" asp-for="VascardId" />
+        <div class="button" asp-action="Delete">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </form>
+    
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <script>
+        Swal.fire("Success!", "@TempData["Success"]", "success");
+    </script>
+}

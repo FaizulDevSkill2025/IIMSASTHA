@@ -4,6 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 
+<link href="~/css/Vascard.css" rel="stylesheet" />
 
 <div>
     <h4>Vascard</h4>
@@ -25,13 +26,13 @@
             @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
         <dd class="col-sm-10">
-            <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/Vascard/Official Size 84kb.jpg" : Model.ImageUrl)" width="120" />
+            <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/Vascard/" : Model.ImageUrl)" width="120" />
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SigImageUrl)
         </dt>
         <dd class="col-sm-10">
-            <img src="@(string.IsNullOrEmpty(Model.SigImageUrl) ? "/Vascard/Signature.jpg" : Model.SigImageUrl)" width="120" />
+            <img src="@(string.IsNullOrEmpty(Model.SigImageUrl) ? "/Vascard/" : Model.SigImageUrl)" width="120" />
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)

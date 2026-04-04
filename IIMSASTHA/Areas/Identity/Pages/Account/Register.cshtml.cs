@@ -103,6 +103,7 @@ namespace IIMSASTHA.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                   
                     _logger.LogInformation("User created a new account.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

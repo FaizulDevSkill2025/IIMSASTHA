@@ -13,21 +13,21 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.VascardId)
         </dt>
-        <dd class="col-sm-10">
+        <dt class="col-sm-10">
             @Html.DisplayFor(model => model.VascardId)
-        </dd>
+        </dt>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Code)
         </dt>
-        <dd class="col-sm-10">
+        <dt class="col-sm-10">
             @Html.DisplayFor(model => model.Code)
-        </dd>
+        </dt>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
-        <dd class="col-sm-10">
+        <dt class="col-sm-10">
             <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/Vascard/" : Model.ImageUrl)" width="120" />
-        </dd>
+        </dt>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SigImageUrl)
         </dt>
@@ -65,7 +65,7 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
-    <form asp-action="Delete" method="post" onsubmit="return confirm('Are You Sure You Want to Delete this Record?');">
+    <form asp-action="Delete" method="post" onsubmit="return confirm('Are You Sure ? You Want to Delete this Record !');">
         <input type="hidden" asp-for="VascardId" />
         <div class="button" asp-action="Delete">
             <input type="submit" value="Delete" class="btn btn-danger" /> |

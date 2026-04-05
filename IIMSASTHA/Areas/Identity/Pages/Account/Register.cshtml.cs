@@ -104,7 +104,9 @@ namespace IIMSASTHA.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                    
-                    _logger.LogInformation("User created a new account.");
+                    _logger.LogInformation("Congratulations ! Registration Successful.");
+
+                    TempData["Congratulations ! Registration Successful"] = $"Registration successful! User: {Input.Email}, Password: {Input.Password}";
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -120,7 +122,8 @@ namespace IIMSASTHA.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return RedirectToPage("./RegisterConfirmation", new { email = Input.Email, password = Input.Password });
+                        //return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {

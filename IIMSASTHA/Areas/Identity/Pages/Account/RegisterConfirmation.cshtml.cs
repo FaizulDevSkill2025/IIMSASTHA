@@ -49,6 +49,7 @@ namespace IIMSASTHA.Areas.Identity.Pages.Account
             Email = email;
             // Once you add a real email sender, you should remove this code that lets you confirm the account
             DisplayConfirmAccountLink = true;
+
             if (DisplayConfirmAccountLink)
             {
                 var userId = await _userManager.GetUserIdAsync(user);

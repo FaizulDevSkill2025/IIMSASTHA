@@ -20,14 +20,19 @@ namespace IIMSASTHA.Controllers
 
         public VascardController(ApplicationDbContext ctx, Ivascard ivascard, IWebHostEnvironment env)
         {
+
             _context = ctx;
+
             _ivascard = ivascard;
+
             _env = env;
         }
 
         public IActionResult Index()
         {
+
             List<Vascard> vcrd = _ivascard.GetAllVascard();
+
             return View(vcrd);
         }
 
@@ -45,6 +50,7 @@ namespace IIMSASTHA.Controllers
             {
 
                 string fileName = Path.GetFileName(ImageFile.FileName);
+
                 string filePath = Path.Combine("wwwroot/Vascard", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -63,6 +69,7 @@ namespace IIMSASTHA.Controllers
             {
 
                 string fileName = Path.GetFileName(SignatureFile.FileName);
+
                 string filePath = Path.Combine("wwwroot/Vascard", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -78,8 +85,11 @@ namespace IIMSASTHA.Controllers
             }
             try
             {
+
                 _ivascard.AddVascard(vcrd);
+
                 _context.SaveChanges();
+
             }
             catch (Exception)
             {
@@ -92,8 +102,11 @@ namespace IIMSASTHA.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+
             var vscrd = _ivascard.GetVascardById(id);
+
             return View(vscrd);
+
         }
 
         [HttpPost]
@@ -104,10 +117,11 @@ namespace IIMSASTHA.Controllers
 
             if (ImageFile != null)
             {
+
                 string fileName = Path.GetFileName(ImageFile.FileName);
+
                 string filePath = Path.Combine("wwwroot/Vascard", fileName);
 
-               
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await ImageFile.CopyToAsync(stream);
@@ -126,6 +140,7 @@ namespace IIMSASTHA.Controllers
             {
 
                 string fileName = Path.GetFileName(SignatureFile.FileName);
+
                 string filePath = Path.Combine("wwwroot/Vascard", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -143,8 +158,11 @@ namespace IIMSASTHA.Controllers
 
             try
             {
+
                 _ivascard.UpdateVascard(vcrd);
+
                 _context.SaveChanges();
+
             }
             catch (Exception)
             {
@@ -158,14 +176,18 @@ namespace IIMSASTHA.Controllers
 
         public IActionResult Details(int id)
         {
+
             var vscrd = _ivascard.GetVascardById(id);
+
             return View(vscrd);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
+
             var vscrd = _context.vascards.Find(id);
+
             return View(vscrd);
         }
 
@@ -174,8 +196,11 @@ namespace IIMSASTHA.Controllers
         {
 
             _ivascard.DeleteVascard(id);
+
             _context.SaveChanges(true);
+
             TempData["Success"] = "Data Deleted Successfully!";
+
             return RedirectToAction(actionName: nameof(Index));
         }
 
@@ -183,15 +208,20 @@ namespace IIMSASTHA.Controllers
 
         private string UplodedFile(Vascard vcrd)
         {
+
             string uniqueFileName = null;
 
             if (vcrd.ImageUrl != null)
             {
 
                 string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + vcrd.ImageUrl;
+
                 uniqueFileName = Guid.NewGuid().ToString() + "_" + vcrd.SigImageUrl;
+
                 string filepath = Path.Combine(uploadsFolder, uniqueFileName);
+
                 using (var fileStream = new FileStream(filepath, FileMode.Create))
                 {
 

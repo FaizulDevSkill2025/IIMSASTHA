@@ -1,15 +1,18 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = "Registration Confirmation";
 }
 
 <h1>@ViewData["Title"]</h1>
+
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
     <p>
+     
         <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click Here</a>
+
     </p>
     }
     else

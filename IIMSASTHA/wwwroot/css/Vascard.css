@@ -1,5 +1,8 @@
 ﻿
-.body2 {
+.body {
+    margin-bottom: 60px;
+    background-size: cover;
+    background-position: center;
     min-height: 100vh;
     display: flex;
     align-items: center;

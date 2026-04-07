@@ -41,6 +41,7 @@ namespace IIMSASTHA.Models
         [Required]
         public DateTime JoiningDate { get; set; }
 
+        [Display(Name = "Dept/RMK/Status")]
         public string Status { get; set; }
     }
 }

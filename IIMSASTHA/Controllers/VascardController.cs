@@ -28,7 +28,7 @@ namespace IIMSASTHA.Controllers
             _env = env;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
             List<Vascard> vcrd = _ivascard.GetAllVascard();
@@ -203,8 +203,6 @@ namespace IIMSASTHA.Controllers
 
             return RedirectToAction(actionName: nameof(Index));
         }
-
-       
 
         private string UplodedFile(Vascard vcrd)
         {
